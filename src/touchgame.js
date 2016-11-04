@@ -30,7 +30,7 @@ var name = new tabris.TextInput({
   message: "Set your name..."
 }).on("accept", function(widget, text){
     names = [text]
-}).appendTo(Page);
+}).appendTo(page);
 
 page.open();
 
