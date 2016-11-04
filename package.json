@@ -1,0 +1,9 @@
+{
+  "title": "Touch Game",
+  "description": "Touchgame",
+  "category": "Small Apps",
+  "main": "src/touchgame.js",
+  "dependencies": {
+    "tabris": "^1.7.0"
+  }
+}
