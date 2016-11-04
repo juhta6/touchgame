@@ -97,10 +97,7 @@ var restart = new tabris.Button({
   hw = 50;
   restart.set("enabled", false)
 }).appendTo(composite);
-
-function times(widget){
   
-
 function start(widget){
  if (set > 0){text.set({layoutData: {top: 10, right: 10}, font: "20px"})}
   if (hw == 15 && set == 1){
