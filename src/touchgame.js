@@ -1,6 +1,8 @@
 var set = 1;
-var point = 0;
+var points = 0;
 var hw = 50;
+
+var hscoress = [30, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000]
 
 var names = [];
 
@@ -29,7 +31,7 @@ var name = new tabris.TextInput({
   layoutData: {top: 60, centerX: 0},
   message: "Set your name..."
 }).on("accept", function(widget, text){
-    names = [text]
+    names = [text+", "]
 }).appendTo(page);
 
 page.open();
@@ -70,7 +72,7 @@ var timer = new tabris.InactivityTimer({
   delay: 1000
 }).on("timeout", function(widget) {
   set = 0
-  text.set({text: "Game over! Your points: " + point, layoutData: {top: 30, centerX: 0}, font: "22px"})
+  text.set({text: "Game over! Your points: " + points, layoutData: {top: 30, centerX: 0}, font: "22px"})
   restart.set("enabled", true)
   block.set({layoutData: {centerX: 0, centerY: 0, height: 50, width: 50}});
 });
@@ -79,6 +81,20 @@ var block = new tabris.Composite({
   layoutData: {centerX: 0, centerY: 0, height: 50, width: 50},
   background: "red"
 }).on("tap", function(widget){
+ for(var point of hscoress){
+if (points == point){
+  var label = new tabris.TextView({
+    layoutData: {centerX: 0, centerY: 0},
+    text: "You've hit " + point + "!",
+   font: "bold 40px"
+  }).appendTo(composite);
+var times = new tabris.InactivityTimer({
+  delay: 500
+}).on("timeout", function(widget) {
+   label.dispose()
+});
+  times.start();
+}}
   start(widget);
   timer.start();
 }).appendTo(composite);
@@ -88,11 +104,11 @@ var restart = new tabris.Button({
   text: "Restart",
   enabled: false
 }).on("select", function(widget){
-  highscore(widget)
+  //highscore(widget)
   timer.cancel();
   block.set({layoutData: {centerX: 0, centerY: 0, height: 50, width: 50}});
   text.set({text: "Start the game", layoutData: {top: 30, centerX:0}});
-  point = 0;
+  points = 0;
   set = 1;
   hw = 50;
   restart.set("enabled", false)
@@ -116,18 +132,18 @@ function start(widget){
   }
  }
  if (set == 1){
-  text.set("text", (++point))
+  text.set("text", (++points))
   var y = Math.floor((Math.random() * 400));
   var x = Math.floor((Math.random() * 150));
   block.set({layoutData: {top: y, left: x, height: hw, width: hw}})
-  hw--;
+  //hw--;
  }
  if (set == 2){
-  text.set("text", (++point))
+  text.set("text", (++points))
   var y = Math.floor((Math.random() * 400));
   var x = Math.floor((Math.random() * 150));
   block.set({layoutData: {top: y, left: x, height: hw, width: hw}})
-  hw++;
+  //hw++;
   }
  }
 //-------------------------------------------------
@@ -137,7 +153,7 @@ var hscore = new tabris.Page({
   background: "white"
 });
 
-var points = point;
+//var points = point;
 
 var back = new tabris.Button({
   layoutData: {left: 10, bottom: 20},
